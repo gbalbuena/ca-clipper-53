@@ -1,0 +1,84 @@
+CA-Clipper
+Version 5.3
+Release Notes
+June 1995
+
+
+This file contains important information about the
+release of CA-Clipper 5.3.  This file is provided as an
+update to your printed CA-Clipper documentation.
+
+
+FLOPPY DISK INSTALLATION
+
+CA-Clipper 5.3 may be installed from within Windows or
+DOS.  To install from within Windows, use the INSTALL.EXE
+on disk 1.  To install from DOS, use the INSTALL.EXE on
+disk 5.
+
+
+CD-ROM INSTALLATION
+
+CA-Clipper 5.3 may be installed from within Windows or
+DOS.  To install from within Windows, use the INSTALL.EXE
+in the WINDOWS directory of your CD-ROM drive.  To install
+from DOS, use the INSTALL.EXE in the DOS directory of your
+CD-ROM drive.
+
+
+VERY IMPORTANT -- If you install a new repository over
+your existing one, all data in the forms, menus, and data
+servers will be lost.  These items are stored in the
+"Binary Objects" module and installing a new repository
+will overwrite this information.  In addition, the
+dependencies between different .PRG and header files will
+also be lost.  Your source code itself, however, will not
+be effected.
+
+
+INSTALLING FROM WINDOWS
+
+If you are using the Windows installer and your copy of
+Windows is NOT installed on the same disk drive as your
+AUTOEXEC.BAT file (i.e., Windows is on the D: drive and
+your AUTOEXEC.BAT file is on the C: drive), at the end of
+the installation, the installer will bring up an error
+message.  The message states, "Cannot find autoexec.bat.
+Would you like to create it?"  Simply answer NO to this
+question and from the Open file dialog box that appears,
+locate your copy of AUTOEXEC.BAT and press OK.  The
+installation will continue correctly from this point.
+
+
+INSTALLING FROM A NETWORK DRIVE
+
+If you have problems when attempting to run the
+installation program from a network drive, copy the
+contents of disk 1 to a floppy disk using XCOPY with
+the /S option and install from the floppy drive.  Then,
+when prompted for the location of the other disks,
+enter the appropriate network drive and directory.
+
+It is important that the installation procedure run
+from beginning to end with no problems.  Therefore, if
+your system locks up or suddenly exits from Windows to
+the DOS prompt during installation, follow the advice
+given above.  Otherwise, you cannot be sure that
+CA-Clipper was installed successfully.
+
+
+INSTALLING FROM DOS
+
+If you have chosen the DOS install to install CA-Clipper
+5.3, you must be aware that none of the files necessary
+to run the CA-Clipper Workbench will be installed.  If
+you would like to run CA-Clipper under Windows using the
+Workbench, you must run the Windows installation from
+disk 1.
+
+
+REBOOT AFTER INSTALLATION!
+
+After CA-Clipper 5.3 has been installed, be sure to
+reboot your computer for all of the system's changes
+to take effect.

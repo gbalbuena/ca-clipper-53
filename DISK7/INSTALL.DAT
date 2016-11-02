@@ -1,0 +1,74 @@
+  @DefineDisk
+     @Label = "Installation Disk 7"
+  @EndDisk
+
+ @If (('A' [= @Group) ||
+      ('B' [= @Group) ||
+      ('C' [= @Group) ||
+      ('D' [= @Group))
+
+  @MoveCStr(1,0,," Installing @Name - Please Wait . . .")
+  @MoveCStr(11,28,,"Decompressing Files . . .")
+
+ @EndIf
+
+ @If ('B' [= @Group)
+   @If (10 [= @Option)
+     @ChDir("@Outdrive:\\@SubDir\\@Bin")
+     @Spawn("@InDrive:\\RUNIPROG 2 7 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+   @Endif
+
+   @If (12 [= @Option)
+     @ChDir("@Outdrive:\\@SubDir\\@Bin")
+     @Spawn("@InDrive:\\RUNIPROG 2 7 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+   @Endif
+
+ @Endif
+
+@If ('A' [= @Group)
+  @ChDir("@Outdrive:\\@SubDir\\@Bin")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+@Endif
+
+@If ('B' [= @Group)
+
+ @If (10 [= @Option)
+  @MkDir("@Outdrive:\\@SubDir\\@Dbu")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 4 @Outdrive:\\@Subdir\\@Dbu\\ @InDrive:\\")
+ @EndIf
+
+ @If (11 [= @Option)
+  @MkDir("@Outdrive:\\@SubDir\\@Pe")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 5 @Outdrive:\\@Subdir\\@Pe\\ @InDrive:\\")
+ @EndIf
+
+ @If (12 [= @Option)
+  @MkDir("@Outdrive:\\@SubDir\\@Rl")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 6 @Outdrive:\\@Subdir\\@Rl\\ @InDrive:\\")
+ @EndIf
+
+@EndIf
+
+/*
+ @If ('C' [= @Group)
+  @MkDir("@Outdrive:\\@SubDir\\@Sample")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 7 @Outdrive:\\@Subdir\\@Sample\\ @InDrive:\\")
+
+  @MkDir("@Outdrive:\\@SubDir\\@Sys")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 8 @Outdrive:\\@Subdir\\@Sys\\ @InDrive:\\")
+ @EndIf
+
+ @If ('D' [= @Group)
+  @MkDir("@Outdrive:\\@SubDir\\@Ng")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 10 @Outdrive:\\@Subdir\\@Ng\\ @InDrive:\\")
+ @Endif
+*/
+
+ @Display
+  @Cls
+ @EndDisplay
+
+ @Chain("Installation Disk 8")
+
+/*
+

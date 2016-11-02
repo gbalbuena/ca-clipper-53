@@ -1,0 +1,38 @@
+  @DefineDisk
+     @Label = "Installation Disk 6"
+/*     @If ('A' [= @Group)
+        @File BASE53.RTT @Out @Outdrive:\\@Subdir\\@Rtl\\*.*
+     @Endif
+*/
+  @EndDisk
+
+ @If ('A' [= @Group)
+   @MoveCStr(1,0,," Installing @Name - Please Wait . . .")
+   @MoveCStr(11,28,,"Decompressing Files . . .")
+
+   @MkDir("@Outdrive:\\@SubDir\\@Lib")
+   @Spawn("@InDrive:\\RUNIPROG 2 6 2 @Outdrive:\\@Subdir\\@Lib\\ @InDrive:\\")
+ @EndIf
+/*
+ @If ('B' [= @Group)
+   @MoveCStr(1,0,," Installing @Name - Please Wait . . .")
+   @MoveCStr(11,28,,"Decompressing Files . . .")
+
+   @If (10 [= @Option)
+     @ChDir("@Outdrive:\\@SubDir\\@Bin")
+     @Spawn("@InDrive:\\RUNIPROG 2 6 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+   @Endif
+
+   @If (12 [= @Option)
+     @ChDir("@Outdrive:\\@SubDir\\@Bin")
+     @Spawn("@InDrive:\\RUNIPROG 2 6 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+   @Endif
+
+ @Endif
+*/
+ @Display
+  @Cls
+ @EndDisplay
+
+
+ @Chain("Installation Disk 7")

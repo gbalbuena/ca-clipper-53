@@ -1,0 +1,137 @@
+  @DefineDisk
+     @Label = "Installation Disk 8"
+  @EndDisk
+
+ @If (('A' [= @Group) ||
+      ('B' [= @Group) ||
+      ('C' [= @Group) ||
+      ('D' [= @Group))
+
+  @MoveCStr(1,0,," Installing @Name - Please Wait . . .")
+  @MoveCStr(11,28,,"Decompressing Files . . .")
+
+ @EndIf
+
+ @If ('C' [= @Group)
+  @MkDir("@Outdrive:\\@SubDir\\@Sample")
+  @Spawn("@InDrive:\\RUNIPROG 2 8 7 @Outdrive:\\@Subdir\\@Sample\\ @InDrive:\\")
+
+  @MkDir("@Outdrive:\\@SubDir\\@Sys")
+  @Spawn("@InDrive:\\RUNIPROG 2 8 8 @Outdrive:\\@Subdir\\@Sys\\ @InDrive:\\")
+ @EndIf
+
+ @If ('D' [= @Group)
+  @MkDir("@Outdrive:\\@SubDir\\@Ng")
+  @Spawn("@InDrive:\\RUNIPROG 2 8 10 @Outdrive:\\@Subdir\\@Ng\\ @InDrive:\\")
+ @Endif
+
+ @Spawn("@InDrive:\\RUNIPROG 2 8 11 @Outdrive:\\@Subdir\\ @InDrive:\\")
+
+
+/*
+@If ('A' [= @Group)
+  @ChDir("@Outdrive:\\@SubDir\\@Bin")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+@Endif
+
+@If ('B' [= @Group)
+
+ @If (10 [= @Option)
+  @MkDir("@Outdrive:\\@SubDir\\@Dbu")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 4 @Outdrive:\\@Subdir\\@Dbu\\ @InDrive:\\")
+ @EndIf
+
+ @If (11 [= @Option)
+  @MkDir("@Outdrive:\\@SubDir\\@Pe")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 5 @Outdrive:\\@Subdir\\@Pe\\ @InDrive:\\")
+ @EndIf
+
+ @If (12 [= @Option)
+  @MkDir("@Outdrive:\\@SubDir\\@Rl")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 6 @Outdrive:\\@Subdir\\@Rl\\ @InDrive:\\")
+ @EndIf
+
+@EndIf
+
+ @If ('C' [= @Group)
+  @MkDir("@Outdrive:\\@SubDir\\@Sample")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 7 @Outdrive:\\@Subdir\\@Sample\\ @InDrive:\\")
+
+  @MkDir("@Outdrive:\\@SubDir\\@Sys")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 8 @Outdrive:\\@Subdir\\@Sys\\ @InDrive:\\")
+ @EndIf
+
+ @If ('D' [= @Group)
+  @MkDir("@Outdrive:\\@SubDir\\@Ng")
+  @Spawn("@InDrive:\\RUNIPROG 2 7 10 @Outdrive:\\@Subdir\\@Ng\\ @InDrive:\\")
+ @Endif
+*/
+
+ @Display
+  @Cls
+ @EndDisplay
+
+@ElseIf (@InDisk == 0)                 /* hard disk */
+
+   @DefineDisk
+      @Label = "Installation Disk 1"
+   @EndDisk
+
+@Else
+
+   ERROR:  Invalid input disk size.  Install terminated.
+   @Pause
+   @Abort
+
+@EndIf
+
+@SetAutoexec
+   @If ('A' [= @Group)
+      @If (101 [= @Option)
+         @Overwrite
+      @Else
+         @DiskProto
+      @EndIf
+
+      @Verbatim "PATH=@OutDrive:\\@SubDir\\@Bin;@OutDrive:\\@Ng;%path%"
+      @SetPrepend("INCLUDE","@OutDrive:\\@SubDir\\@Include")
+      @SetPrepend("LIB","@OutDrive:\\@SubDir\\@Lib")
+      @SetPrepend("OBJ","@OutDrive:\\@SubDir\\@Obj")
+   @EndIf
+@EndAutoexec
+
+@SetConfig
+   @If ('A' [= @Group)
+      @If (201 [= @Option)
+         @Overwrite
+      @Else
+         @DiskProto
+      @EndIf
+
+      @Files   = 25
+      @Buffers = 15
+   @EndIf
+@EndConfig
+
+@Finish
+   @Delete("@Outdrive:\\@Subdir\\@Bin\\clipper.53")
+   @ChDrive(@OutDrive)
+   @ChDir("@SubDir")
+
+  @Cls
+  €ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ€     @Name Installation
+  € Computer        €
+  €  Associates     €     CA-Clipper 5.3 has been successfully installed
+  €   International €     on your computer. Before using the product,
+  €‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹€     view the README file located in the @SubDir
+       ‹‹‹‹‹‹‹‹‹          directory using your word processor or the DOS
+    ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹       TYPE command. This file contains the latest
+                          product information.
+
+
+
+@Pause
+@EndFinish
+
+/*---------------------* EOF INSTALL.DAT *--------------------*/
+

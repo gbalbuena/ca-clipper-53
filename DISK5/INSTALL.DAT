@@ -1,0 +1,484 @@
+/****************************************************************/
+/*  INSTALL.DAT                                                 */
+/*                                                              */
+/*  Copyright (c) 1992 Computer Associates International        */
+/*  All Rights Reserved                                         */
+/*                                                              */
+/*  Last revision:   06/28/94                                   */
+/****************************************************************/
+
+@DefineProject
+   @Group     = "A"
+   @Requires  @HardDisk
+   @Name      = "CA-Clipper 5.3"
+   @Version   = "5.3"
+   @OutDrive  = C
+   @Subdir    = "\\CLIP53"
+   @Immediate = 1
+   @Terse
+@EndProject
+
+@DefineVars
+   @Integer @InDisk  = 0      /* change for proper input disk type */
+   @Integer @Fails   = 0
+   @Integer @Totsize = 0
+   @Integer @TotKB   = 0
+   @Integer @Asize   = 6148
+   @Integer @Bsize   =  347
+   @Integer @Csize   =  292
+   @Integer @Dsize   = 2322
+
+   @Integer @DBUsize =  242
+   @Integer @PEsize  =   13
+   @Integer @RLsize  =   92
+
+/* Maxsize is the sum of A, B, C, and D size.  Must be updated if any of those
+   are changed!!! */
+   @Integer @Maxsize = 9109
+   @Dir @Bin         = "\\BIN"
+   @Dir @Include     = "\\INCLUDE"
+   @Dir @Lib         = "\\LIB"
+   @Dir @Obj         = "\\OBJ"
+   @Dir @Dbu         = "\\SOURCE\\DBU"
+   @Dir @Pe          = "\\SOURCE\\PE"
+   @Dir @Rl          = "\\SOURCE\\RL"
+   @Dir @Sample      = "\\SOURCE\\SAMPLE"
+   @Dir @Sys         = "\\SOURCE\\SYS"
+   @Dir @Ng          = "\\NG"
+   @Dir @Rtl         = "\\RTL"
+   @Qstring @NewLine = "\n"
+   @Qstring @Qs1     = " System Files            "
+   @Qstring @Qs2     = " Utilities Source Code   "
+   @Qstring @Qs3     = " Sample Programs         "
+   @Qstring @Qs4     = " On-line Documentation   "
+   @Qstring @Qs10     = "Database Utility - DBU"
+   @Qstring @Qs11     = "Program Editor - PE"
+   @Qstring @Qs12     = "Report and Label Utility - RL"
+   @Qstring @Yes      = "=> "
+@EndVars
+
+@Display
+@Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     This program will install @Name on your
+  Û   International Û     computer system and verify the integrity
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ     of the distribution disks. The basic steps
+       ÜÜÜÜÜÜÜÜÜ          in the installation procedure are as follows:
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+                          ş Select target drive and directory
+                          ş Select files you want to install
+                          ş Install selected files
+                          ş Update AUTOEXEC.BAT and CONFIG.SYS
+
+
+     You will be prompted step by step through the procedure and, when
+     you are finished, @Name will be installed on your hard disk.
+     Press Esc at any time to stop the installation.
+
+                                       @Pause
+
+@EndDisplay
+
+DrivePick:
+@GetOutDrive
+@Suppress A
+@Suppress B
+@LocalWindow(11,36)
+@Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Select Target Drive:
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+
+
+
+
+
+
+
+
+
+
+   Use  and  to highlight a drive, and press ÄÙ to select and continue.
+                            Press Esc to exit.
+@EndOutDrive
+
+@GetSubdir
+@LocalWindow(6,56)
+@Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Select Target Directory
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ WARNING!  The installation will overwrite the files in the       ³
+    ³ target directory.  If another release of CA-Clipper is installed ³
+    ³ in the target directory that is displayed, you may want to       ³
+    ³ install CA-Clipper 5.3 into a different directory to prevent     ³
+    ³ losing files.  Please note that \CLIPPER53 is not a valid        ³
+    ³ directory name, as it will be truncated to \CLIPPER5.            ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+     Type a directory name (limit 8 characters), and press ÄÙ to
+     continue. Press Esc to exit.
+
+@EndSubdir
+
+GroupPick:
+@Totsize = (0)
+@GetGroups
+   @LocalWindow(7,40)
+   @SetGroup(A)
+   @SetGroup(B)
+   @SetGroup(C)
+   @SetGroup(D)
+   @CheckBox
+   @Cls
+                          @Name Installation
+
+                          Select Groups to Install:
+
+
+
+
+
+
+      ş System Files are the basic files necessary to compile, link
+        and debug programs.
+      ş Utilities are additional utilities to aid you in application
+        development.  If you choose to install the utilities, you will
+        be given the option to select which utilities to install.
+      ş Sample Programs are the source code files for the sample
+        programs and replaceable system files.
+      ş On-line Documentation consists of the files required to access
+        the on-line documentation.
+
+    Use  and  to highlight a group, and press Space to change its status.
+                   Press ÄÙ to continue or Esc to exit.
+   @Set A = "@Qs1  @Asize KB"
+   @Set B = "@Qs2  @Bsize KB"
+   @Set C = "@Qs3  @Csize KB"
+   @Set D = "@Qs4  @Dsize KB"
+@EndGroups
+
+@If ('B' [= @Group)
+   @GetOption
+   @CheckBox
+   @SetOption(10)
+   @SetOption(11)
+   @SetOption(12)
+   @LocalWindow(7,40)
+   @Cls
+                          @Name Installation
+
+                        Install the Following Utilities:
+
+
+
+
+   @Option 10 = "Database Utility - DBU             @DBUSize KB  "
+   @Option 11 = "Program Editor - PE                @PESize KB   "
+   @Option 12 = "Report and Label Utility - RL      @RLSize KB   "
+
+@Newline
+          The Utilities Group contains additional utilities that are
+          available to aid you in application development.  The files
+          will be installed to the following directories:
+
+          Executables  =>  @Subdir\BIN
+          DBU source   =>  @Subdir\SOURCE\DBU
+          RL source    =>  @Subdir\SOURCE\RL
+          PE source    =>  @Subdir\SOURCE\PE
+
+    Use  and  to highlight a group, and press Space to change its status.
+                   Press ÄÙ to continue or Esc to exit.
+   @EndOption
+@EndIf
+
+/* Calculate installation disk space size */
+
+@If ('A' [= @Group)
+   @Totsize = (@Totsize + @Asize)
+@EndIf
+
+@If ('B' [= @Group)
+   @If (10 [= @Option)
+     @Totsize = (@Totsize + @DBUsize)
+   @Endif
+   @If (11 [= @Option)
+     @Totsize = (@Totsize + @PEsize)
+   @Endif
+   @If (12 [= @Option)
+     @Totsize = (@Totsize + @RLsize)
+   @Endif
+@EndIf
+
+@If ('C' [= @Group)
+   @Totsize = (@Totsize + @Csize)
+@EndIf
+
+@If ('D' [= @Group)
+   @Totsize = (@Totsize + @Dsize)
+@EndIf
+
+@TotKB = (@Totsize * 1024)
+
+@If (@TotKB > @DiskFree @OutDrive)
+   @GetOption
+   @ClearOption(1)
+   @ClearOption(2)
+   @ClearOption(3)
+   @ClearOption(4)
+
+   @LocalWindow(7,42)
+   @Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Select an Action:
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+                        @Option 1 = "Select a different drive"
+                        @Option 2 = "Select different file groups"
+                        @Option 3 = "Continue with installation"
+                        @Option 4 = "Exit to DOS"
+
+@NewLine
+       ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+       ³   WARNING! There is not enough disk space to complete this    ³
+       ³   installation.                                               ³
+       ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+       The installation requires @TotKB bytes and DRIVE @OutDrive has only
+       @DiskFree @OutDrive bytes available.
+
+
+   Use  and  to highlight an option, and press ÄÙ to select and continue.
+                             Press Esc to exit.
+   @EndOption
+
+   @If (1 [= @Option)
+      @Goto DrivePick
+   @EndIf
+   @If (2 [= @Option)
+      @Goto GroupPick
+   @EndIf
+   @If (4 [= @Option)
+      @Display
+         @Cls
+         @Abort
+      @EndDisplay
+   @EndIf
+@EndIf
+
+@Display
+@Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     The groups denoted with '=>' will be installed
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ  @If ('A' [= @Group)   @Yes @Qs1 @Else       @Qs1 @Endif
+       ÜÜÜÜÜÜÜÜÜ       @If ('B' [= @Group)   @Yes @Qs2 @Else       @Qs2 @Endif
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ    @If (10 [= @Option)   @Yes     @Qs10 @Else           @Qs10 @Endif
+                       @If (11 [= @Option)   @Yes     @Qs11 @Else           @Qs11 @Endif
+                       @If (12 [= @Option)   @Yes     @Qs12 @Else           @Qs12 @Endif
+                       @If ('C' [= @Group)   @Yes @Qs3 @Else       @Qs3 @Endif
+                       @If ('D' [= @Group)   @Yes @Qs4 @Else       @Qs4 @Endif
+
+                          @Totsize KB is required for the installation.
+
+
+
+                                     @pause
+@EndDisplay
+
+/*
+@If ('A' [= @Group)
+  @Display
+  @Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Checking files.  Please wait ...
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+
+  @MkDir("@Outdrive:\\@SubDir\\@Bin")
+  @If (@System("@StartupDrive:\\product @Outdrive:\\@SubDir\\@Bin")==0)
+  @Endif
+  @EndDisplay
+
+  @If (!@Exists("@Outdrive:\\@SubDir\\@Bin\\clipper.53"))
+  @Display
+  @LocalWindow(7,46)
+  @Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Invalid version.
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+  @NewLine
+         ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+         ³   ERROR! This release of CA-Clipper is only for use in    ³
+         ³   the U.S. and Canada.  Please contact your dealer for    ³
+         ³   the correct international release of CA-Clipper.        ³
+         ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+                            @Pause
+
+   @EndDisplay
+   @Abort
+   @EndIf
+@EndIf
+*/
+
+@If ('A' [= @Group)
+   @GetOption
+   @LocalWindow(7,38)
+   @Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Allow changes to AUTOEXEC.BAT?
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+                        @Option 101 = "  Yes  "
+                        @Option 102 = "  No   "
+   @Newline
+      For CA-Clipper to work correctly, the DOS environment variables
+      LIB, INCLUDE, and OBJ must be set.  It is recommended that
+      you allow the install to make the necessary changes to your
+      AUTOEXEC.BAT file. If you choose not to allow changes, the
+      proposed changes will be written to AUTOEXEC.NEW.
+
+   @EndOption
+@EndIf
+
+@If ('A' [= @Group)
+   @GetOption
+   @LocalWindow(7,38)
+   @Cls
+  ÛßßßßßßßßßßßßßßßßßÛ     @Name Installation
+  Û Computer        Û
+  Û  Associates     Û     Allow changes to CONFIG.SYS?
+  Û   International Û
+  ÛÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÛ
+       ÜÜÜÜÜÜÜÜÜ
+    ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+
+                        @Option 201 = "  Yes  "
+                        @Option 202 = "  No   "
+@Newline
+      For CA-Clipper to work correctly, the FILES and BUFFERS settings
+      must be adjusted.  It is recommended that you allow the install
+      to make the necessary changes to your CONFIG.SYS file. If you
+      choose not to allow changes, the proposed changes will be written
+      to CONFIG.NEW.
+
+   @EndOption
+@EndIf
+
+@If (@DiskSize (@InDrive)     < 400000)
+   @Indisk = 360
+@ElseIf (@DiskSize (@InDrive) < 750000)
+   @Indisk = 720
+@ElseIf (@DiskSize (@InDrive) < 1300000)
+   @Indisk = 1200
+@ElseIf (@DiskSize (@InDrive) < 1500000)
+   @Indisk = 1440
+@Else
+   @Indisk = 0
+@EndIf
+
+@If (@InDisk == 720)
+   @DefineDisk
+      @Label = "Installation Disk 5"
+   @EndDisk
+
+   @DefineDisk
+      @Label = "Installation Disk 6"
+   @EndDisk
+
+   @DefineDisk
+      @Label = "Installation Disk 7"
+   @EndDisk
+
+   @DefineDisk
+      @Label = "Installation Disk 8"
+   @EndDisk
+
+@ElseIf (@InDisk == 1200)
+   @DefineDisk
+      @Label = "Installation Disk 5"
+   @EndDisk
+
+   @DefineDisk
+      @Label = "Installation Disk 6"
+   @EndDisk
+
+   @DefineDisk
+      @Label = "Installation Disk 7"
+   @EndDisk
+
+@ElseIf (@InDisk == 1440)
+   @DefineDisk
+      @Label = "Installation Disk 5"
+      @File README.TXT @Out @Outdrive:\\@Subdir\\*.*
+
+/*
+      @If (('A' [= @Group) ||
+           ('B' [= @Group) ||
+           ('C' [= @Group) ||
+           ('D' [= @Group))
+
+      @Else
+           @Abort
+      @EndIf
+*/
+  @EndDisk
+
+ @If ('A' [= @Group)
+   @MoveCStr(1,0,," Installing @Name - Please Wait . . .")
+   @MoveCStr(11,28,,"Decompressing Files . . .")
+
+   @MkDir("@Outdrive:\\@SubDir\\@Bin")
+   @Spawn("@InDrive:\\RUNIPROG 2 5 0 @Outdrive:\\@Subdir\\@Bin\\ @InDrive:\\")
+
+   @MkDir("@Outdrive:\\@SubDir\\@Obj")
+   @Spawn("@InDrive:\\RUNIPROG 2 5 3 @Outdrive:\\@Subdir\\@Obj\\ @InDrive:\\")
+
+   @MkDir("@Outdrive:\\@SubDir\\@Include")
+   @Spawn("@InDrive:\\RUNIPROG 2 5 1 @Outdrive:\\@Subdir\\@Include\\ @InDrive:\\")
+/*
+   @MkDir("@Outdrive:\\@SubDir\\@Lib")
+   @Spawn("@InDrive:\\RUNIPROG 2 5 2 @Outdrive:\\@Subdir\\@Lib\\ @InDrive:\\")
+*/
+ @EndIf
+
+@EndIf
+
+ @Display
+  @Cls
+ @EndDisplay
+
+
+ @Chain("Installation Disk 6")
